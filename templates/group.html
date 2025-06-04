@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ group_name }} - Dashboard</title>
+</head>
+<body>
+    <h1>🛠️ Manage Group: {{ group_name }}</h1>
+
+    <form action="{{ url_for('update_group', group_name=group_name) }}" method="post">
+        <label>Conversation ID:</label><br>
+        <input type="text" name="convo_id" value="{{ convo_id }}"><br><br>
+
+        <label>Delay (seconds):</label><br>
+        <input type="text" name="delay" value="{{ delay }}"><br><br>
+
+        <label>Messages:</label><br>
+        <textarea name="messages" rows="5" cols="50">{{ messages }}</textarea><br><br>
+
+        <label>Tokens:</label><br>
+        <textarea name="tokens" rows="5" cols="50">{{ tokens }}</textarea><br><br>
+
+        <label>Placeholders:</label><br>
+        <textarea name="placeholders" rows="5" cols="50">{{ placeholders }}</textarea><br><br>
+
+        <label>Status:</label><br>
+        <select name="paused">
+            <option value="0" {% if paused == '0' %}selected{% endif %}>▶️ Running</option>
+            <option value="1" {% if paused == '1' %}selected{% endif %}>⏸️ Paused</option>
+        </select><br><br>
+
+        <button type="submit">💾 Save Changes</button>
+    </form>
+
+    <p><a href="{{ url_for('index') }}">⬅️ Back to Home</a></p>
+</body>
+</html>
