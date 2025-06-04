@@ -1,22 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Group Dashboard</title>
+    <title>All Groups</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input, select {
+            margin: 5px;
+            padding: 8px;
+        }
+        .group-form {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
-    <h1>📋 All Groups</h1>
+    <h1>📋 <b>All Groups</b></h1>
 
-    <ul>
+    <div class="group-form">
+        <h2>Create New Group</h2>
+        <form method="POST" action="/create-group">
+            <input type="text" name="group_name" placeholder="Group Name" required />
+            <input type="text" name="convo_id" placeholder="Convo ID (e.g., t_123456)" required />
+            <input type="number" name="delay" placeholder="Delay (in seconds)" required />
+            <select name="paused">
+                <option value="false">Active</option>
+                <option value="true">Paused</option>
+            </select>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+
+    <hr />
+
+    <div id="groups">
         {% for group in groups %}
-            <li><a href="{{ url_for('group_dashboard', group_name=group) }}">{{ group }}</a></li>
+            <p><b>{{ group }}</b></p>
         {% endfor %}
-    </ul>
-
-    <h2>Create New Group</h2>
-    <form action="{{ url_for('create_group') }}" method="post">
-        <input type="text" name="group_name" placeholder="Group Name" required>
-        <button type="submit">Create</button>
-    </form>
+    </div>
 </body>
 </html>
