@@ -60,4 +60,6 @@ def resume_group(group):
     return redirect(f"/group/{group}")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    os.makedirs(GROUPS_DIR, exist_ok=True)
+    threading.Thread(target=start_all_groups, daemon=True).start()
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
